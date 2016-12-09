@@ -10,8 +10,6 @@
 <body>
     <div align="center">
         <h1>Spring Security Basic Demo (Java Config)</h1>
-        <a href="/tshirtdesign/user/basic">Go to Basic Page</a>
-        <br />
         <a href="/tshirtdesign/user/admin">Go to Administrator Page</a>
     </div>
 </body>

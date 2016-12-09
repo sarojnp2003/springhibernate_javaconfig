@@ -6,6 +6,7 @@ package com.tshirtdesign.dao.impl;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.springframework.stereotype.Repository;
 
 import com.tshirtdesign.dao.AbstractDao;
@@ -35,9 +36,16 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 	 */
 	@Override
 	public User findByUsername(String userName) {
-		Query query = getSession().createSQLQuery("SELECT a.email FROM user_details a WHERE a.email = ?");
-		query.setParameter(1, userName);
-		return (User) query.list().get(0);
+		SQLQuery query = getSession().createSQLQuery("SELECT * FROM user_details a WHERE a.email = :email");
+		query.setParameter("email", userName);
+		query.addEntity(User.class);
+		@SuppressWarnings("unchecked")
+		List<User> user = query.list();
+		if(user.size() > 0) {
+			return user.get(0);
+		} else {
+			return null;
+		}
 	}
 
 	/* (non-Javadoc)
